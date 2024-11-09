@@ -1,0 +1,135 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Resume Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Form Section -->
+        <div class="form-section" id="form-section">
+            <h2>Resume Builder</h2> <!-- Only in the form section -->
+            <form id="resume-form">
+                <!-- Personal Information Section -->
+                <h3>Personal Information</h3>
+                <label for="profile-image">Profile Image:</label>
+                <input type="file" id="profile-image" accept="image/*" onchange="previewImage(event)">
+
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" placeholder="Your Name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="your.email@example.com" required>
+
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" placeholder="123-456-7890" required>
+
+                <!-- Education Section -->
+                <div class="form-section">
+                    <h3>Education</h3>
+                    <div id="education-container">
+                        <label for="education-level">Education Level:</label>
+                        <select id="education-level" onchange="showSchoolField()" class="education-dropdown" required>
+                            <option value="">Select Level</option>
+                            <option value="matric">Matric</option>
+                            <option value="o-level">O Level</option>
+                            <option value="a-level">A Level</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="graduate">Graduate</option>
+                        </select>
+                        <div id="school-field" style="display: none;">
+                            <label for="school-name">School Name:</label>
+                            <input type="text" id="school-name" placeholder="Enter school name" required />
+                        </div>
+                        <div id="college-field" style="display: none;">
+                            <label for="college-name">College Name:</label>
+                            <input type="text" id="college-name" placeholder="Enter college name" required />
+                        </div>
+                        <div id="graduation-field" style="display: none;">
+                            <label for="graduation-institution">Graduation Institution:</label>
+                            <input type="text" id="graduation-institution" placeholder="Enter graduation institution" required />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Work Experience Section -->
+                <h3>Work Experience</h3>
+                <label for="job-title">Job Title:</label>
+                <input type="text" id="job-title" placeholder="Your Job Title" required>
+
+                <label for="company">Company:</label>
+                <input type="text" id="company" placeholder="Your Company Name" required>
+
+                <label for="experience">Years of Experience:</label>
+                <input type="text" id="experience" placeholder="Number of Years" required>
+
+                <!-- Skills Section -->
+                <h3>Skills</h3>
+                <label for="skills">Skills (comma-separated):</label>
+                <input type="text" id="skills" placeholder="HTML, CSS, JavaScript" required>
+
+                <!-- About Me Section -->
+                <h3>About Me</h3>
+                <label for="about">Brief Introduction:</label>
+                <textarea id="about" placeholder="Brief introduction about yourself" required></textarea>
+
+                <!-- Generate Button -->
+                <button type="button" onclick="generateResume()">Generate Resume</button>
+            </form>
+        </div>
+
+        <!-- Preview Section -->
+        <div class="preview-section" id="preview-section" style="display: none;">
+            <div class="resume">
+                <!-- Profile Image Preview -->
+                <div class="profile-image-container">
+                    <img id="preview-image" src="placeholder.png" alt="Profile Picture">
+                </div>
+                <div class="header">
+                    <p id="preview-job-title">Your Job Title</p>
+                </div>
+                
+                <div class="section">
+                    <h2>About Me</h2>
+                    <p><strong>Full Name:</strong> <span id="preview-contact-name">Your Name</span></p>
+                    <p><strong>About:</strong> <span id="preview-about">A brief introduction about yourself</span></p>
+                </div>
+
+                <div class="section">
+                    <h2>Education</h2>
+                    <p><strong>School Name:</strong> <span id="preview-school-name">Your School Name</span></p>
+                    <p><strong>College Name:</strong> <span id="preview-college-name">Your College Name</span></p>
+                    <p><strong>Graduation Institution:</strong> <span id="preview-graduation-institution">Your Graduation Institution</span></p>
+                </div>
+
+                <div class="section">
+                    <h2>Skills</h2>
+                    <p><strong>Skills:</strong>  <span id="preview-skills">HTML, CSS, JavaScript</span></p>
+                </div>
+
+                <div class="section">
+                    <h2>Work Experience</h2>
+                    <p><strong>Job Title:</strong> <span id="preview-experience-job-title">Your Job Title</span></p>
+                    <p><strong>Company:</strong> <span id="preview-company">Your Company Name</span></p>
+                    <p><strong>Years of Experience:</strong> <span id="preview-years-of-experience">Number of Years</span></p>
+                </div>
+
+                <div class="section">
+                    <h2>Contact</h2>
+                    <p><strong>Email:</strong> <span id="preview-email">your.email@example.com</span></p>
+                    <p><strong>Phone:</strong> <span id="preview-phone">123-456-7890</span></p>
+                </div>
+            </div>
+            <!-- Buttons -->
+            <div class="button-row">
+                <button onclick="editAgain()">Edit Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
